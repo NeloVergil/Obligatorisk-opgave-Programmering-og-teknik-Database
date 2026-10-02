@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PedrosCantinaShiftScheduleClasslib/PedrosCantinaShiftScheduleClasslib.csproj" />
+  <Project Path="PedrosCantinaShiftScheduleConsole/PedrosCantinaShiftScheduleConsole.csproj" />
+</Solution>
