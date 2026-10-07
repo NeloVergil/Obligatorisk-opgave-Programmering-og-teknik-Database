@@ -1,10 +1,25 @@
+using DotNetEnv;
 using Microsoft.Data.SqlClient;
+
 namespace PedrosCantinaShiftScheduleClasslib;
 
 public class PedrosCantinaShiftScheduleRepository
 {
-    private const string _connectionString = @"Data Source=localhost;Initial Catalog=PedrosCantinaShiftScheduleDB;User ID=sa;Password=@dmin123;Pooling=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
+    private static readonly string _connectionString = LoadConnectionString();
     private SqlConnection _connection;
+
+    private static string LoadConnectionString()
+    {
+        Env.Load();
+        try
+        {
+            return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Failed to load connection string.", ex);
+        }
+    }
 
     private void OpenConnection()
     {
